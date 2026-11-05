@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LexCounsel - Legal Advisor</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f6fa;
+            color: #222;
+        }
+
+        nav {
+            background: #14243a;
+            color: white;
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h2 {
+            color: #d4ad65;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .hero {
+            background: #14243a;
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero span {
+            color: #d4ad65;
+        }
+
+        .hero p {
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+
+        button {
+            background: #d4ad65;
+            color: #14243a;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        section {
+            padding: 50px 8%;
+            text-align: center;
+        }
+
+        section h2 {
+            margin-bottom: 25px;
+            color: #14243a;
+        }
+
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            width: 250px;
+            border-radius: 8px;
+            box-shadow: 0 3px 12px #0001;
+        }
+
+        .card h3 {
+            color: #b58b45;
+            margin-bottom: 15px;
+        }
+
+        .page {
+            display: none;
+            min-height: 65vh;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .request {
+            background: #e8edf3;
+            padding: 15px;
+            margin: 25px auto;
+            max-width: 500px;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        footer {
+            background: #14243a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form {
+            max-width: 450px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <h2>LexCounsel</h2>
+
+    <div>
+        <a href="#/home">Home</a>
+        <a href="#/about">About</a>
+    </div>
+</nav>
+
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+
+    <div class="hero">
+        <h1>Welcome to <span>LexCounsel</span></h1>
+        <p>Your Trusted Partner for Legal Guidance and Support</p>
+        <button onclick="location.hash='/about'">
+            Learn More
+        </button>
+    </div>
+
+    <section>
+        <h2>Our Legal Services</h2>
+
+        <div class="services">
+
+            <div class="card">
+                <h3>Family Law</h3>
+                <p>Legal guidance for family matters, divorce and related issues.</p>
+            </div>
+
+            <div class="card">
+                <h3>Business Law</h3>
+                <p>Legal assistance for business agreements and disputes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Criminal Law</h3>
+                <p>Legal support and guidance for criminal cases.</p>
+            </div>
+
+            <div class="card">
+                <h3>Property Law</h3>
+                <p>Assistance with property matters and legal documentation.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Contact Our Legal Team</h2>
+
+        <form onsubmit="submitForm(event)">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Describe your legal enquiry" required></textarea>
+            <button type="submit">Submit Enquiry</button>
+        </form>
+
+        <p id="message" style="margin-top:15px;"></p>
+    </section>
+
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="about" class="page">
+
+    <section style="padding-top:100px;">
+
+        <h2>About LexCounsel</h2>
+
+        <p>
+            LexCounsel is a legal advisor website designed to
+            provide information about legal services and guidance.
+        </p>
+
+        <br>
+
+        <p>
+            Our goal is to help individuals and businesses
+            understand their legal needs and find suitable assistance.
+        </p>
+
+        <div class="request">
+            <h3>HTTP Request Details</h3>
+            <p id="url">Request URL: /about</p>
+            <p id="method">Request Method: GET</p>
+            <p>Response Status: 200 OK</p>
+        </div>
+
+        <button onclick="location.hash='/home'">
+            Back to Home
+        </button>
+
+    </section>
+
+</div>
+
+<footer>
+    <p>© 2026 LexCounsel | Legal Advisor Website</p>
+</footer>
+
+<script>
+
+    function showPage() {
+
+        let route = location.hash || "#/home";
+
+        document.getElementById("home").classList.remove("active");
+        document.getElementById("about").classList.remove("active");
+
+        if (route === "#/about") {
+
+            document.getElementById("about").classList.add("active");
+
+            document.getElementById("url").innerText =
+                "Request URL: /about";
+
+        } else {
+
+            document.getElementById("home").classList.add("active");
+
+            document.getElementById("url").innerText =
+                "Request URL: /home";
+
+        }
+    }
+
+    window.addEventListener("hashchange", showPage);
+
+    showPage();
+
+    function submitForm(event) {
+        event.preventDefault();
+
+        document.getElementById("message").innerText =
+            "Your enquiry has been submitted successfully!";
+        
+        event.target.reset();
+    }
+
+</script>
+
+</body>
+</html>
